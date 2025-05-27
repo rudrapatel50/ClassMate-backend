@@ -3,6 +3,7 @@ const express = require("express");
 const connectMongo = require("./config/db.js");
 const authRoutes = require("./routes/authRoutes.js");
 const projectRoutes = require("./routes/projectRoutes.js");
+const taskRoutes = require("./routes/taskRoutes.js");
 const cors = require('cors');
 const helmet = require('helmet');
 const { authLimiter, apiLimiter } = require('./middleware/rateLimiter');
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/projects", projectRoutes);
+app.use("/api/v1/tasks", taskRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
