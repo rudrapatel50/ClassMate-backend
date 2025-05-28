@@ -18,4 +18,14 @@ router.post("/login", validateLogin, login);
 // Protected routes
 router.post("/logout", auth, logout);
 
+router.get("/me", auth, async (req, res) => {
+  try {
+    // Remove sensitive fields if needed
+    const { password, ...userWithoutPassword } = req.user.toObject();
+    res.json(userWithoutPassword);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;
